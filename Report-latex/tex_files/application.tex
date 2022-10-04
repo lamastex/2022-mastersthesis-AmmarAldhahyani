@@ -5,9 +5,10 @@
 
 On May 25 of 2020, George Floyd, a 46-year-old African American man was arrested and treated harshly by three police officers leaving Mr.~Floyd unable to breathe which lead to his death \cite{dreyer2020death}. That incident re-initiated a movement known by the name ``BlackLivesMatter" which initially became nationally recognized for street demonstrations following the 2014 deaths of two African Americans \cite{garza2014herstory}. BlackLivesMatter movement was also trending in Twitter which is one of the main social media platforms where people discuss political and social matters and millions of people were tweeting about that topic by including hashtags related to the movement and the situation at that moment.
 
-\\\
+% % \\\  You cannot do this in TeX! RAAZ  You cannot do this in TeX! RAAZ
 
-Twitter is a free social networking tool that is widely used and it allows users to share opinions and information by posting brief comments in a real-time news feed \cite{mistry2011critical, bristol2010twitter}. Comments posted by users are called tweets and they are limited to no more than 140 character and it can include links to a website, video, and all other material online. Once a tweet is sent, it appears in the the Twitter's feed of anyone who is following the user. A user can follow other users in Twitter and that will allow their tweets to appear in the user's feed. Moreover, the user can like, reply to, and retweet another user's tweet. Retweeting a tweet means that a user can share somebody else's tweet that has appeared in the user's feed. When a user retweet a tweet it goes to all the user's followers however it shows others that was not originally the user's tweet. Hashtags are keywords identified by an initial '#' symbol and they help to locate particular areas of discussion \cite{bristol2010twitter}. Hashtags are used within tweets to categorise tweets and to attract more attention to them. Twitter also has other features such as direct message between users, blocking followers, and many others.
+Twitter is a free social networking tool that is widely used and it allows users to share opinions and information by posting brief comments in a real-time news feed \cite{mistry2011critical, bristol2010twitter}. Comments posted by users are called tweets and they are limited to no more than 140 character and it can include links to a website, video, and all other material online. Once a tweet is sent, it appears in the the Twitter's feed of anyone who is following the user. A user can follow other users in Twitter and that will allow their tweets to appear in the user's feed. Moreover, the user can like, reply to, and retweet another user's tweet. Retweeting a tweet means that a user can share somebody else's tweet that has appeared in the user's feed. When a user retweet a tweet it goes to all the user's followers however it shows others that was not originally the user's tweet. Hashtags are keywords identified by an initial \# % escape macro-parameter # 
+symbol and they help to locate particular areas of discussion \cite{bristol2010twitter}. Hashtags are used within tweets to categorise tweets and to attract more attention to them. Twitter also has other features such as direct message between users, blocking followers, and many others.
 
 
 
@@ -55,7 +56,7 @@ georgefloyd & 13393\\
 
 From the Table~\ref{tab:hashs}, it can be seen that the majority of the hashtags are aligned with the BlackLivesMatter movement but also there are other hashtags belong to other counter movements like AllLivesMatter and BlueLivesMatter which also emerged as a response to the BlackLivesMatter movement. To make it simpler, BlackLivesMatter movement will be used from now on for all the hashtags aligned with the movement and AllLivesMatter movement will be used to represents both ALLLivesMatter and BlueLivesMatter movements.
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 Some facts about the tweets containing the hashtags:
 
@@ -76,13 +77,14 @@ Each collected tweet in the database has multiple variables and the main ones ar
 \caption[]{Tweet's variables \label{tab:vars}}
 \begin{tabular}{@{\extracolsep{\fill} } c c c c c}
 \toprule
-
-CurrentTweetDate & CurrentTwID & language & CTweetFavourites & CTweetRetweets & 
+%% You have written too many alignment tabs in a table, causing one of them to be turned into a line break. Make sure you have specified the correct number of columns in your table. RAAZ
+CurrentTweetDate & CurrentTwID & language & CTweetFavourites & CTweetRetweets \\ %& 
 CPostUserId & userCreatedAtDate & 
 OPostUserIdinRT & CPostUserName & 
-CPostUserSN & favouritesCount & followersCount
- & friendsCount & isVerified & isGeoEnabled & CurrentTweet & hashTags & mediaType & TweetType\\ 
-
+CPostUserSN \\ %& 
+favouritesCount & followersCount
+ & friendsCount & isVerified & isGeoEnabled \\% 
+ CurrentTweet & hashTags & mediaType & TweetType & etc. \\ 
 \bottomrule
 \end{tabular}
 \end{table}
@@ -121,13 +123,11 @@ This process created three communities and assigned each tweet to one community 
 \caption[]{New Tweet's Structure\label{tab:new-var}}
 \begin{tabular}{@{\extracolsep{\fill} } c c c c c c}
 \toprule
-
+% You have written too many alignment tabs in a table, causing one of them to be turned into a line break. Make sure you have specified the correct number of columns in your table. RAAZ
 twDate & userSn & twId & userId & twRetweet & 
-twFav & userN & 
-lang & favouritesCount & 
-followersCount & friendsCount & isVerified
- & Community & isGeoEnabled & hashTags & CurrentTweet\\ 
-
+twFav \\ %& 
+userN & lang & favouritesCount & followersCount & friendsCount \\ %& 
+isVerified & Community & isGeoEnabled & hashTags & CurrentTweet\\ 
 \bottomrule
 \end{tabular}
 \end{table}
@@ -139,13 +139,13 @@ followersCount & friendsCount & isVerified
 
 Creating a visualization example that can be shared and accessed by anybody, needs a tool that can be displayed in the browser. D3 which stands for data-driven-documents \cite{2011-d3} is one of the most powerful visualisation tools that is also a web visualization tool that can run in the back-end or the front-end. It is a JavaScript library that can run in a plain JavaScript script or combined with one of the front-end frameworks. Processing speed, customisation, and interface are the three main aspects of any visualization tool and D3 gets the best out of the three.  
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 \textbf{React.js}
 
 Reactjs is a front-end JavaScript library \cite{aggarwal2018modern} used for building user interfaces based on UI components and it is created and maintained by Meta and a huge community of developers and companies. Reactjs enables development of complex web based applications and allows the data to change without subsequent page refreshes \cite{aggarwal2018modern}.
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 Combining D3 with Reactjs is tricky if they are not understood well since both of them need to control the DOM (The document object model) however if they were integrated properly they can create unlimited options and they can take advantage of each other. 
 
@@ -155,7 +155,7 @@ Combining D3 with Reactjs is tricky if they are not understood well since both o
 
 The example dataset provided here has multiple variables that can be used in the visualizations such as twDate, followersCount, twRetweet, Community, CurrentTweet, and others. Time series visualization can take advantage of having the dates to display the data over time but also the interactive part of the visualization can play an important role to display other variables that otherwise would be impossible to be displayed.
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 
 \begin{figure}[H]
@@ -186,14 +186,14 @@ Above in Figure~\ref{fig:main-interface} is the initial display of the top tweet
 
 As a static visualization, it can reveal some good insights such as the distribution of communities and the popularity among them along with a time frame, however, events, contents, and people behind all of that are not visible. Moreover, In the case of multiple thousands of tweets, the nodes representing tweets would be overlapped and hard to read or differentiate.  
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 \subsubsection{Navigation Strategies}
 
 \textbf{Zoom Strategy}
 
 The zoom strategy allows the user initially to see the overview and then zoom in to access details of interest. In this example, the continuous space navigation system is used which allows access to different scales, efficiently uses screen space, and offers infinite scalability \cite{bederson1994pad++, johnson1999tree}. In Figure~\ref{fig:e-zoom} below, it is the same visualization but after applying zoom functionality whether by using the mouse scroll or the trackpad gestures. After zooming in or out, a constant mouse click on the screen plus moving the mouse to any direction brings out the hidden nodes that disappeared after the application of zoom functionality. One more feature is how the y and x axes adapt to this functionality by changing their values to match only the data being displayed.  
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 The initial view of the zoomed area displayed in Figure~\ref{fig:e-zoom} was visually showing overlapped data and their features were not quite clear. With such data representing a movement that started at one moment and then followed along the way with critical events, the user would need to observe closely how those events impacted the movements. Zoom strategy in this case enables the user to dive in and have a closer look to determine the outcomes of the events.
 
@@ -206,21 +206,21 @@ The initial view of the zoomed area displayed in Figure~\ref{fig:e-zoom} was vis
 \end{figure}
 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 \textbf{Focus, Context, Overview \& Detail}
 
 Looking at the data from the overview or while zooming in and out is helpful as it allows the user to see the distribution of different groups or communities over time and some of their features but to gain more insights, the user needs to see more details about each tweet and user to end up with a full picture of the situation. There needs to be a way to reveal much more detailed information without sacrificing the context of the whole data. 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 One of the functions which was implemented here uses focus, overview, and detail strategies to uncover more details about the data while preserving the context of the whole data. Figure~\ref{fig:e-popup} below, shows a popup window that appears horizontally in the middle of the display. The popup's work mechanism is when the user hovers over one of the data points displayed on the graph in the overview or any zoom mode, the data point distinguishes itself by increasing its radius and the mouse arrow turns to a hand shape to indicate that interactivity happened and is related to the focus strategy. Moreover, as the data point hovers over, a pop-up gets displayed that contains multiple types of information about the tweet and the user such as the number of retweets, the number of favorites, followers, the status of the account being verified or not, the community, the tweets' date and time, and the tweet's content. 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 This is a good example to highlight the power of combining D3 with React. D3 by itself can create a tool-tip which is a small popup window but the issue with that relating to this example is that D3's tool-tip can't be customized and it normally displays the data point name or a number when hovering over the data point. In the example presented here, there are multiple types of information to be displayed and they need to be styled and represented in a certain way to use the popup space efficiently which can not be done by D3 alone. Another point is that D3's tool-tip is designed to appear above the hovered data point which could create a significant problem here. In this example, the data points are distributed all over the display and some of them are located on the far left or right of the display. Considering the D3 tool-tip mechanism of displaying the tool-tip just above the data point, data points that are located near the borders when are hovered over will result in a big chunk of the popup window being hidden because it crosses the borderline of the visualization display that all D3's elements can only be seen within. On the other hand, React's ability to control the whole DOM --the application programming interface--, obtains the x-y-coordinates of each data point within the D3's display and within the whole interface screen, and thereby allows it to use such information to display the popup window in many different ways. Moreover, React's ability to use many styling libraries allows it to style the popup window in a user-friendly way to display different information. For this example, React uses the x-y-coordinates of the data point and fixes the x-axis position of the popup for all the data points to be in the middle of the screen to overcome the issue when there are data points located near the display's border. On the other hand, it sets the y-axis position of the popup window to be higher by some percentage of that data point's x-axis position so that when a data point hovers over, the popup window will always get displayed above the data point and that solves the issue of overlapping the data point and the popup window. For example, if the data point is located at the center of the display and its popup window's content is big, as the user hovers over the data point, the popup window will tend to show but as the popup window starts to appear and part of it would be over the data point then the mouse arrow will be over the popup window not anymore hovering over the data point which will result in not displaying the popup window. It is a complex procedure but quite powerful and limitless as described in a previous section compared to other tools like Vega and Vega-Lite which are easier libraries that are based on D3 itself but with limited options.
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 The result of the procedure as shown in Figure~\ref{fig:e-popup} is a piece of additional information about the data point without sacrificing the overview and the whole picture of the data.
 
@@ -244,7 +244,7 @@ As the user is able to hover over the data points and reveal the tweet's informa
 \label{fig:e-twitter}
 \end{figure}
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 \subsubsection{Visual Interaction Strategies}
 
@@ -298,7 +298,7 @@ Another use of the selection strategy is to display only a specific group of dat
 
 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 In many cases and this case, specifically, enabling the user to explore the relationships between tweets is powerful. It allows the users to create such a network of data of their choice and based on their vision without overwhelming the display with links between the data or with preprocessed links based on the author's view. 
 Figure~\ref{fig:e-m-filters}(a) shows how the user can type a text and then filter only tweets that contain the text. In this case, filtering the tweets using words and names that are related to events that occur through the timeline of the movement could result in creating links between different events and groups. 
@@ -355,15 +355,15 @@ Going further and combining multiple filters as shown in the other visualization
 
 First of all, this data does not represent all tweets that were published after the death of George Floyd nor it is claimed to be. It only represents the top hundred most retweeted tweets of each community of the data collected from a prior study and the insights presented in this section just from the provided data only showcase how the interactive visualization strategies implemented for this thesis project could help in revealing those insights. 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 By using the community drop-down menu and selecting the AllLivesMatter community, Figure~\ref{fig:e-alm-overtime} shows that AllLivesMatter Community tweets which are 75 tweets out of the 200 tweets for all communities. Observing all tweets' contents shows that tweets' context changes over time. Tweets inside the blue box in Figure~\ref{fig:e-alm-overtime} are mostly using the AllLivesMatter hashtag to criticize people behind that hashtag as Figure~\ref{fig:e-alm-overtime}(b) shows some of these tweets. As the tweets inside the blue box represent the first few days following George Floyd's death, it shows how people were reacting to the AllLivesMatters movement and how they thought it was not relevant to the central message of the BlackLivesMatter. 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 On the other hand, many of the tweets inside the green rectangle which started a few days after George Floyd's death have a different context. Around 60\% of the users behind these tweets are from the AllLivesMatters community and the context of their tweets whether complaining about the actions of the people behind the BlackLivesMatter movement and accusing them of violent acts or with modest opinions to ease the conflict. 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 Perceived insights from the visual exploration of the AllLivesMatter community include:
 
@@ -394,7 +394,7 @@ Perceived insights from the visual exploration of the AllLivesMatter community i
   % include second image
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obser2.png}
   
-  \\\
+  % \\\  You cannot do this in TeX! RAAZ
   
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obser3.png}
   \caption{Area inside the blue box}
@@ -407,7 +407,7 @@ Perceived insights from the visual exploration of the AllLivesMatter community i
   % include second image
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obser4.png}  
   
-  \\\
+  % \\\  You cannot do this in TeX! RAAZ
   
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obser5.png} 
  \caption{Area inside the green rectangle}
@@ -419,7 +419,7 @@ Perceived insights from the visual exploration of the AllLivesMatter community i
   % include second image
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obser6.png}
   
-  \\\
+  % \\\  You cannot do this in TeX! RAAZ
   
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obser7.png}
  \caption{Area inside the green rectangle}
@@ -436,7 +436,7 @@ Perceived insights from the visual exploration of the AllLivesMatter community i
 
 When processing the data before the visualization, a new column called Community was added mainly to categorize tweets that contain both AllLivesMatter and BlackLivesMatter hashtags to observe why was that the case and whom do the users behind the tweets aligned with. Figure~\ref{fig:e-mixed-overtime} shows the 25 tweets which were displayed when the mixed community filter was applied. Moreover, part(b) shows two tweets as an example of the displayed tweets from the Mixed community. 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 Perceived insights from the visual exploration of tweets containing both hashtags
 
@@ -462,7 +462,7 @@ Perceived insights from the visual exploration of tweets containing both hashtag
   % include second image
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obserm1.png}
   
-  \\\
+  % \\\  You cannot do this in TeX! RAAZ
   
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obserm2.png}
   \caption{Examples of the tweets}
@@ -480,7 +480,7 @@ Perceived insights from the visual exploration of tweets containing both hashtag
 It is quite interesting to see and observe how each community reacts to the same expression. Figure~\ref{fig:e-m-f-obs}(a) shows the counts and distribution of data points after typing ``police" in the tweets' content filter. To make sure that only tweets with the ``police" word are not to mix that with the ``police" word being included in a hashtag, a space was typed before ``police". There are 23 tweets in total across all communities, 9 tweets within the BlackLivesMatter community, 13 tweets within the AllLivesMatter community, and only one tweet with mixed hashtags. Figure~\ref{fig:e-m-f-obs}(b) shows tweets from 
 the BlackLivesMatter community with the ``police" word in context, while Figure~\ref{fig:e-m-f-obs}(c) shows the ones from the AllLivesMatter community. 
 
-\\\
+% \\\  You cannot do this in TeX! RAAZ
 
 It is clear that in most cases each community has a different reaction to the police actions. While the majority of the BlackLivesMatter community believes that police officers and cops are racist and brutal towards black people, the majority of the AllLivesMatter community supports police actions and even sometimes believes that protesters are violent against the cops.   
 
@@ -502,7 +502,7 @@ It is clear that in most cases each community has a different reaction to the po
   % include second image
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obserpb1.png}
   
-  \\\
+  % \\\  You cannot do this in TeX! RAAZ
   
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obserpb2.png}
   \caption{Text filter with only BlackLivesMatter community}
@@ -515,7 +515,7 @@ It is clear that in most cases each community has a different reaction to the po
   % include second image
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obserpa1.png}
   
-  \\\
+  % \\\  You cannot do this in TeX! RAAZ
   
   \includegraphics[width=1\linewidth]{Report-latex/tex_files/pics/example/obserpa2.png}
   \caption{Text filter with only AllLivesMatter community}
