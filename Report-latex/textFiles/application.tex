@@ -1,0 +1,504 @@
+\section{Interactive Visualization \cite{d3tool} : A BLM Use Case}
+
+
+\subsection{Overview}
+
+On May 25 of 2020, George Floyd, a 46-year-old African American man was arrested and treated harshly by three police officers leaving Mr.~Floyd unable to breathe which lead to his death \cite{dreyer2020death}. 
+That incident re-initiated a movement known by the name ``BlackLivesMatter" which initially became nationally recognized for street demonstrations following the 2014 deaths of two African Americans \cite{garza2014herstory}. 
+BlackLivesMatter movement was also trending in Twitter which is one of the main social media platforms where people discuss political and social matters and millions of people were tweeting about that topic by including hashtags related to the movement and the situation at that moment.
+
+Twitter is a free social networking tool that is widely used and it allows users to share opinions and information by posting brief comments in a real-time news feed \cite{mistry2011critical, bristol2010twitter}. 
+Comments posted by users are called tweets and they are limited to no more than 140 character and it can include links to a website, video, and all other material online. 
+Once a tweet is sent, it appears in the the Twitter's feed of anyone who is following the user. A user can follow other users in Twitter and that will allow their tweets to appear in the user's feed. 
+Moreover, the user can like, reply to, and retweet another user's tweet. Retweeting a tweet means that a user can share somebody else's tweet that has appeared in the user's feed. 
+When a user retweet a tweet it goes to all the user's followers however it shows others that was not originally the user's tweet. Hashtags are keywords identified by an initial \# % escape macro-parameter # 
+symbol and they help to locate particular areas of discussion \cite{bristol2010twitter}. Hashtags are used within tweets to categorise tweets and to attract more attention to them. 
+Twitter also has other features such as direct message between users, blocking followers, and many others.
+
+
+\subsection{Dataset}
+
+The data set that was collected \cite{BLM_TD} has 41.8 million tweets from 10 million users. The collected tweets has one of the keywords regarding BlackLivesMatter movement and AllLivesMatter movement. 
+The data set contains tweets from the beginning of the movement in 2013 to the last of June 2020.
+
+In this thesis, only tweets posted after the death of George Floyed till the last of June 2020 were used. 
+The number of original tweets from this period was 1628162 tweets and below Table~\ref{tab:hashs} shows some of the most popular hashtags between these tweets and the number of occurrences of the hashtags.
+
+
+\begin{table}[H]
+\centering
+\caption{Hashtags. \label{tab:hashs}}
+\begin{tabular}{@{\extracolsep{\fill} } c c c c c c}
+\toprule
+
+hashTag & hashtag Count\\ 
+\midrule
+BlackLivesMatter & 1215006\\
+blacklivesmatter & 273839\\
+GeorgeFloyd & 67475 \\
+BLM & 63920 \\
+\color{red}
+AllLivesMatter & 61339\\
+JusticeForGeorgeFloyd & 41952 \\
+blm & 38580 \\
+\color{red}
+BlueLivesMatter & 33586\\
+BLACKLIVESMATTER & 22653\\
+Blacklivesmatter & 18392\\
+icantbreathe & 17236 \\
+racism & 15992 \\
+NoJusticeNoPeace & 14478\\
+georgefloyd & 13393\\
+
+\bottomrule
+\end{tabular}
+\end{table}
+
+From the Table~\ref{tab:hashs}, it can be seen that the majority of the hashtags are aligned with the BlackLivesMatter movement but also there are other hashtags belong to other counter movements like AllLivesMatter and BlueLivesMatter which also emerged as a response to the BlackLivesMatter movement. 
+To make it simpler, BlackLivesMatter movement will be used from now on for all the hashtags aligned with the movement and AllLivesMatter movement will be used to represents both ALLLivesMatter and BlueLivesMatter movements.
+
+Some facts about the tweets containing the hashtags:
+
+\begin{itemize}
+    \item Each tweet could include one or more hashtags.
+    \item A tweet that includes a specific hashtag does not necessarily mean the content of the tweet is indeed related to the subject. For example, the hashtag might be used merely for publicity.
+    \item A tweet that includes a specific hashtag does not necessarily mean that the content of the tweet is positive towards the hashtag, it might be neutral or negative.
+ 
+\end{itemize}
+
+
+
+
+Each collected tweet in the database has multiple variables and the main ones are shown below in Table~\ref{tab:vars} :   
+
+\begin{table}[H]
+\centering
+\caption{Tweet's variables \label{tab:vars}}
+\begin{tabular}{@{\extracolsep{\fill} } c c c c c}
+\toprule
+%% You have written too many alignment tabs in a table, causing one of them to be turned into a line break. Make sure you have specified the correct number of columns in your table. RAAZ
+CurrentTweetDate & CurrentTwID & language & CTweetFavourites & CTweetRetweets \\ %& 
+CPostUserId & userCreatedAtDate & 
+OPostUserIdinRT & CPostUserName & 
+CPostUserSN \\ %& 
+favouritesCount & followersCount
+ & friendsCount & isVerified & isGeoEnabled \\% 
+ CurrentTweet & hashTags & mediaType & TweetType & etc. \\ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Delimitations}
+
+\begin{itemize}
+    \item The interactive visualization tool was built to adapt the data introduced in this paper and it is not intended for production since this data is private and the app can not accept other data since it is not automated.
+    \item The data presented in the paper was not claimed to represent all the tweets from the same period.
+    \item The observations made when visualizing the data only tend to show the capability of the interactive visualization strategies that were implemented and how they can be useful when visualizing or analyzing the data.
+    
+\end{itemize}
+
+
+\subsection{Data Processing}
+
+Creating an interactive visualization for such a huge dataset would require the visualization to be implemented in the cloud or using a high-performance computer since not only the dataset is required to be processed and presented for the first time but also every time there would be any interaction by the user. For this use case, a sample of the dataset was used to create interactive visualization. The below procedures have to be done to the dataset to create a useful visualization with some insights:
+
+
+\begin{itemize}
+    \item Filtering the top 100 most retweeted tweets that contain BlackLivesMatter or synonymous hashtags. A new column called ``Community" is created and its value for each tweet is set to ``BlackLivesMatter" if the tweet only contains hashtags of the BlackLivesMatter movement or set to ``Mixed"  if the tweet also contains hashtags of the AllLivesMatter movement. 
+    
+    \item Applying the same method to obtain the top 100 tweets that contain AllLivesMatter or synonymous hashtags but this time the Community column's value for each tweet is set to ``AllLivesMatter" if the tweet only contains hashtags of the AllLivesMatter movement or ``Mixed" if the tweet also contains hashtags of the BlackLivesMatter movement. 
+    
+    \item Binding both groups in decent orders in respect to the tweets' number of retweets but this time selecting only some of the table variables as shown below in Table~\ref{tab:new-var} since not all of them are needed to create the visualization. Moreover, the reason not to directly filter the top 200 tweets is to avoid the domination of The BlackLivesMatter hashtag due to its popularity as shown in Table~\ref{tab:hashs} and also to create multiple groups to be compared. 
+    
+
+
+\end{itemize}
+
+This process created three communities and assigned each tweet to one community depending on the hashtags included in the tweet. The community in this scenario only represents a group of tweets sharing similar hashtags which would be useful in visualization to observe if the tweets' context of a specific community aligns with the tweets' hashtags of the same community. The three communities created are BlackLivesMatter community, AllLivesMatter community, and Mixed community.
+
+
+\begin{table}[H]
+\centering
+\caption{New Tweet's Structure\label{tab:new-var}}
+\begin{tabular}{@{\extracolsep{\fill} } c c c c c c}
+\toprule
+% You have written too many alignment tabs in a table, causing one of them to be turned into a line break. Make sure you have specified the correct number of columns in your table. RAAZ
+twDate & userSn & twId & userId & twRetweet & 
+twFav \\ %& 
+userN & lang & favouritesCount & followersCount & friendsCount \\ %& 
+isVerified & Community & isGeoEnabled & hashTags & CurrentTweet\\ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Visualization tool}
+
+\textbf{D3}
+
+Creating a visualization example that can be shared and accessed by anybody, needs a tool that can be displayed in the browser. D3 which stands for data-driven-documents \cite{2011-d3} is one of the most powerful visualisation tools that is also a web visualization tool that can run in the back-end or the front-end. It is a JavaScript library that can run in a plain JavaScript script or combined with one of the front-end frameworks. Processing speed, customisation, and interface are the three main aspects of any visualization tool and D3 gets the best out of the three.  
+
+% \\\  You cannot do this in TeX! RAAZ
+
+\textbf{React.js}
+
+Reactjs is a front-end JavaScript library \cite{aggarwal2018modern} used for building user interfaces based on UI components and it is created and maintained by Meta and a huge community of developers and companies. Reactjs enables development of complex web based applications and allows the data to change without subsequent page refreshes \cite{aggarwal2018modern}.
+
+% \\\  You cannot do this in TeX! RAAZ
+
+Combining D3 with Reactjs is tricky if they are not understood well since both of them need to control the DOM (The document object model) however if they were integrated properly they can create unlimited options and they can take advantage of each other. 
+
+\subsection{Time Series Interactive Visualization \cite{d3tool}}
+
+\subsubsection{Visualization's Overview}
+
+The example dataset provided here has multiple variables that can be used in the visualizations such as twDate, followersCount, twRetweet, Community, CurrentTweet, and others. Time series visualization can take advantage of having the dates to display the data over time but also the interactive part of the visualization can play an important role to display other variables that otherwise would be impossible to be displayed.
+
+% \\\  You cannot do this in TeX! RAAZ
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.9\textwidth]{./pics/main.png}
+\caption{D3 interface for BLM \& ALM movements in Twitter}
+\label{fig:main-interface}
+\end{figure}
+
+
+
+Above in Figure~\ref{fig:main-interface} is the initial display of the top tweets of the  BLM \& ALM movements on Twitter. The display contains multiple components as the visualization itself or the inputs. Below is a detailed explanation of all the components.
+
+\begin{itemize}
+    \item The x-axis represents the date of an original tweet.  
+    \item The y-axis represents the number of retweets of the original tweet.
+    \item Blue circles represent tweets that only contain the BlackLivesMatter community hashtags.
+    \item Red circles represent tweets that only contain the AllLivesMatter community hashtags.
+    \item Green circles represent tweets that contain both communities' hashtags.
+    \item Circles with darker colors and a border represent tweets belonging to verified users.
+    \item The radius of the circles represents the number of followers the user has.
+    \item The drop-down menu has multiple options starting with all communities or a specific community by itself.
+    \item The filter input is a search field to type words and filter through tweets that contain them.
+    \item The last input is an integer input which is limited between zero and the length of the whole dataset. It displays the top number of tweets in terms of the number of retweets. Initially, it starts with a number that represents the length of the whole dataset.  
+\end{itemize}
+
+As a static visualization, it can reveal some good insights such as the distribution of communities and the popularity among them along with a time frame, however, events, contents, and people behind all of that are not visible. Moreover, In the case of multiple thousands of tweets, the nodes representing tweets would be overlapped and hard to read or differentiate.  
+
+\subsubsection{Navigation Strategies}
+
+\textbf{Zoom Strategy}
+
+The zoom strategy allows the user initially to see the overview and then zoom in to access details of interest. In this example, the continuous space navigation system is used which allows access to different scales, efficiently uses screen space, and offers infinite scalability \cite{bederson1994pad++, johnson1999tree}. In Figure~\ref{fig:e-zoom} below, it is the same visualization but after applying zoom functionality whether by using the mouse scroll or the trackpad gestures. After zooming in or out, a constant mouse click on the screen plus moving the mouse to any direction brings out the hidden nodes that disappeared after the application of zoom functionality. One more feature is how the y and x axes adapt to this functionality by changing their values to match only the data being displayed.  
+
+
+The initial view of the zoomed area displayed in Figure~\ref{fig:e-zoom} was visually showing overlapped data and their features were not quite clear. With such data representing a movement that started at one moment and then followed along the way with critical events, the user would need to observe closely how those events impacted the movements. Zoom strategy in this case enables the user to dive in and have a closer look to determine the outcomes of the events.
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.9\textwidth]{./pics/zoom.png}
+\caption{Applying zoom to the interface}
+\label{fig:e-zoom}
+\end{figure}
+
+
+% \\\  You cannot do this in TeX! RAAZ
+
+\textbf{Focus, Context, Overview \& Detail}
+
+Looking at the data from the overview or while zooming in and out is helpful as it allows the user to see the distribution of different groups or communities over time and some of their features but to gain more insights, the user needs to see more details about each tweet and user to end up with a full picture of the situation. There needs to be a way to reveal much more detailed information without sacrificing the context of the whole data. 
+
+% \\\  You cannot do this in TeX! RAAZ
+
+One of the functions which was implemented here uses focus, overview, and detail strategies to uncover more details about the data while preserving the context of the whole data. Figure~\ref{fig:e-popup} below, shows a popup window that appears horizontally in the middle of the display. The popup's work mechanism is when the user hovers over one of the data points displayed on the graph in the overview or any zoom mode, the data point distinguishes itself by increasing its radius and the mouse arrow turns to a hand shape to indicate that interactivity happened and is related to the focus strategy. Moreover, as the data point hovers over, a pop-up gets displayed that contains multiple types of information about the tweet and the user such as the number of retweets, the number of favorites, followers, the status of the account being verified or not, the community, the tweets' date and time, and the tweet's content. 
+
+% \\\  You cannot do this in TeX! RAAZ
+
+This is a good example to highlight the power of combining D3 with React. D3 by itself can create a tool-tip which is a small popup window but the issue with that relating to this example is that D3's tool-tip can't be customized and it normally displays the data point name or a number when hovering over the data point. In the example presented here, there are multiple types of information to be displayed and they need to be styled and represented in a certain way to use the popup space efficiently which can not be done by D3 alone. Another point is that D3's tool-tip is designed to appear above the hovered data point which could create a significant problem here. In this example, the data points are distributed all over the display and some of them are located on the far left or right of the display. Considering the D3 tool-tip mechanism of displaying the tool-tip just above the data point, data points that are located near the borders when are hovered over will result in a big chunk of the popup window being hidden because it crosses the borderline of the visualization display that all D3's elements can only be seen within. On the other hand, React's ability to control the whole DOM --the application programming interface--, obtains the x-y-coordinates of each data point within the D3's display and within the whole interface screen, and thereby allows it to use such information to display the popup window in many different ways. Moreover, React's ability to use many styling libraries allows it to style the popup window in a user-friendly way to display different information. For this example, React uses the x-y-coordinates of the data point and fixes the x-axis position of the popup for all the data points to be in the middle of the screen to overcome the issue when there are data points located near the display's border. On the other hand, it sets the y-axis position of the popup window to be higher by some percentage of that data point's x-axis position so that when a data point hovers over, the popup window will always get displayed above the data point and that solves the issue of overlapping the data point and the popup window. For example, if the data point is located at the center of the display and its popup window's content is big, as the user hovers over the data point, the popup window will tend to show but as the popup window starts to appear and part of it would be over the data point then the mouse arrow will be over the popup window not anymore hovering over the data point which will result in not displaying the popup window. It is a complex procedure but quite powerful and limitless as described in a previous section compared to other tools like Vega and Vega-Lite which are easier libraries that are based on D3 itself but with limited options.
+
+% \\\  You cannot do this in TeX! RAAZ
+
+The result of the procedure as shown in Figure~\ref{fig:e-popup} is a piece of additional information about the data point without sacrificing the overview and the whole picture of the data.
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.9\textwidth]{./pics/popup.png}
+\caption{Popup window with additional information}
+\label{fig:e-popup}
+\end{figure}
+
+As the user is able to hover over the data points and reveal the tweet's information and some of the user's information but at some points, the user might need to see more about the users behind the tweets, their bios, and other tweets to gain more insights. Figure~\ref{fig:e-twitter}, shows a Twitter official interface located on the right side of the interface. This interface displays the user's Twitter page and the user can scroll through that user's tweets and activities. For the user to display this interface, instead of hovering over the data point, the user needs to click on the data point and that interface would be displayed on the side of the display revealing the user's Twitter page. Clicking again at the same data point will make that interface disappear. This is another overview \& detail strategy implemented in this example to present more information without again sacrificing the overview or distracting the user. Moreover, when the Twitter interface is displayed, the user can click on the Twitter interface of that Twitter user to open another tab on the browser where Twitter's full official website is presented and directed to that specific user behind the tweet however the user examining this visualization has to be signed in to their Twitter account to go through it. Such a visualization strategy uniforms to Twitter's user and developer rules.
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.9\textwidth]{./pics/twitter.png}
+\caption{Twitter Interface}
+\label{fig:e-twitter}
+\end{figure}
+
+% \\\  You cannot do this in TeX! RAAZ
+
+\subsubsection{Visual Interaction Strategies}
+
+\textbf{Selecting \& Filtering Strategies}
+
+This dataset has 200 data points but in other cases, the dataset could have thousands of data points which in many cases, the user would need to filter or select only some data of interest. Enabling the user to interactively select or filter items of interest is fundamental in visualization. Figure~\ref{fig:top-10} shows how the user can filter a certain number of top tweets in terms of the number of retweets. In this case, it is powerful to display the most effective tweets and look through their contents and users behind them and relate them to certain events that happened at that time. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.9\textwidth]{./pics/top10.png}
+\caption{Top 10 Tweets}
+\label{fig:top-10}
+\end{figure}
+
+
+Another use of the selection strategy is to display only a specific group of data. Figure~\ref{fig:e-coms} shows multiple visualizations where each one of them displays only the data of one community. It helps the user to see the popularity, distribution, and counts of each community. Furthermore, it helps to focus on one group without getting distracted by other data while going through details using other strategies. 
+
+\begin{figure}[H]
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include first image
+  \includegraphics[width=0.9\linewidth]{./pics/eblm.png}  
+  \caption{BlackLivesMatter Community}
+  \label{fig:sub-first-blmc}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/ealm.png}  
+  \caption{AllLivesMatter Community}
+  \label{fig:sub-second-almc}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/emixed.png}  
+  \caption{Mixed Community}
+  \label{fig:sub-third-mc}
+\end{subfigure}
+
+\captionsetup{justification=centering}
+\caption{Communities' Tweets }
+\label{fig:e-coms}
+\end{figure}
+
+\newpage
+
+
+In many cases and this case, specifically, enabling the user to explore the relationships between tweets is powerful. It allows the users to create such a network of data of their choice and based on their vision without overwhelming the display with links between the data or with preprocessed links based on the author's view. 
+Figure~\ref{fig:e-m-filters}(a) shows how the user can type a text and then filter only tweets that contain the text. In this case, filtering the tweets using words and names that are related to events that occur through the timeline of the movement could result in creating links between different events and groups. 
+
+Going further and combining multiple filters as shown in the other visualizations in Figure~\ref{fig:e-m-filters} can create stronger links because it allows the user to create a subgroup of a subgroup that indicate tighter links between them. Such filters can mimic the idea of a network visualization in some cases like the one shown here without any extra analysis the data beforehand and also without devoting another graph to visualize the network data.    
+
+
+\begin{figure}[H]
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include first image
+  \includegraphics[width=0.9\linewidth]{./pics/allF.png}  
+  \caption{Text filter with all communities}
+  \label{fig:sub-first-tfac}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/blmF.png}  
+  \caption{Text filter with only BlackLivesMatter community}
+  \label{fig:sub-second-tfblc}
+\end{subfigure}
+
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/almF.png}  
+  \caption{Text filter with only AllLivesMatter community}
+  \label{fig:sub-third-tfamc}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/mixedF.png}  
+  \caption{Text filter with only Mixed community}
+  \label{fig:sub-fourth-tfmc}
+\end{subfigure}
+       
+\captionsetup{justification=centering}
+\caption{Multiple Filters}
+\label{fig:e-m-filters}
+\end{figure}
+
+
+
+\subsection{Some Data Insights Using Interactive Visualization Strategies}
+
+\subsubsection{Observing AllLivesMatter Community Tweets Over Time}
+
+First of all, this data does not represent all tweets that were published after the death of George Floyd nor it is claimed to be. It only represents the top hundred most retweeted tweets of each community of the data collected from a prior study and the insights presented in this section just from the provided data only showcase how the interactive visualization strategies implemented for this thesis project could help in revealing those insights. 
+
+
+By using the community drop-down menu and selecting the AllLivesMatter community, Figure~\ref{fig:e-alm-overtime} shows that AllLivesMatter Community tweets which are 75 tweets out of the 200 tweets for all communities. Observing all tweets' contents shows that tweets' context changes over time. Tweets inside the blue box in Figure~\ref{fig:e-alm-overtime} are mostly using the AllLivesMatter hashtag to criticize people behind that hashtag as Figure~\ref{fig:e-alm-overtime}(b) shows some of these tweets. As the tweets inside the blue box represent the first few days following George Floyd's death, it shows how people were reacting to the AllLivesMatters movement and how they thought it was not relevant to the central message of the BlackLivesMatter. 
+
+
+On the other hand, many of the tweets inside the green rectangle which started a few days after George Floyd's death have a different context. Around 60\% of the users behind these tweets are from the AllLivesMatters community and the context of their tweets whether complaining about the actions of the people behind the BlackLivesMatter movement and accusing them of violent acts or with modest opinions to ease the conflict. 
+
+
+Perceived insights from the visual exploration of the AllLivesMatter community include:
+
+\begin{itemize}
+    \item AllLivesMatter movement is much less in counts and number of retweets compared to the BlackLivesMatter movement.
+    \item Many of the tweets using the AllLivesMatter hashtag are actually by users criticizing the AllLivesMatter movement.
+    \item Tweets during the first few days after the death of George Floyd were the most popular in terms of retweets and most of them were criticizing the AllLivesMater movement.
+    \item With time, many tweets using the AllLivesMatter hashtag started to criticize some subversive actions supposedly committed by some people behind the BlackLivesMatter movement.  
+    
+ 
+ 
+\end{itemize}
+
+
+\begin{figure}[H]
+
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=1\linewidth]{./pics/obser1.png}  
+  \caption{AllLivesMatter community's tweets}
+  \label{fig:sub-first-almcts}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/obser2.png}
+  
+  \includegraphics[width=0.9\linewidth]{./pics/obser3.png}
+  \caption{Area inside the blue box}
+  \label{fig:sub-second-aibb}
+\end{subfigure}
+
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/obser4.png}  
+  
+  \includegraphics[width=0.9\linewidth]{./pics/obser5.png} 
+ \caption{Area inside the green rectangle}
+  \label{fig:sub-third-aigr}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/obser6.png}
+  
+  \includegraphics[width=0.9\linewidth]{./pics/obser7.png}
+ \caption{Area inside the green rectangle}
+  \label{fig:sub-fourth-aigrr}
+\end{subfigure}
+
+\captionsetup{justification=centering}
+\caption{AllLivesMatter Community Overtime}
+\label{fig:e-alm-overtime}
+\end{figure}
+
+
+\subsubsection{Verifying the mixed community}
+
+When processing the data before the visualization, a new column called Community was added mainly to categorize tweets that contain both AllLivesMatter and BlackLivesMatter hashtags to observe why was that the case and whom do the users behind the tweets aligned with. Figure~\ref{fig:e-mixed-overtime} shows the 25 tweets which were displayed when the mixed community filter was applied. Moreover, part(b) shows two tweets as an example of the displayed tweets from the Mixed community. 
+
+
+Perceived insights from the visual exploration of tweets containing both hashtags
+
+\begin{itemize}
+    \item It is considered the smallest community out of the three.
+    \item In most cases, including both hashtags was used to criticize the AllLivesMatter movement.
+    
+\end{itemize}
+
+\begin{figure}[H]
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/obserm.png}  
+ 
+  \caption{Mixed community's tweets}
+  \label{fig:sub-first-mctweets}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/obserm1.png}
+  
+  \includegraphics[width=0.9\linewidth]{./pics/obserm2.png}
+  \caption{Examples of the tweets}
+  \label{fig:sub-second-extws}
+\end{subfigure}
+
+\captionsetup{justification=centering}
+\caption{Mixed Community Overtime}
+\label{fig:e-mixed-overtime}
+\end{figure}
+
+
+\subsubsection{Observations from conducting multiple filters}
+
+It is quite interesting to see and observe how each community reacts to the same expression. Figure~\ref{fig:e-m-f-obs}(a) shows the counts and distribution of data points after typing ``police" in the tweets' content filter. To make sure that only tweets with the ``police" word are not to mix that with the ``police" word being included in a hashtag, a space was typed before ``police". There are 23 tweets in total across all communities, 9 tweets within the BlackLivesMatter community, 13 tweets within the AllLivesMatter community, and only one tweet with mixed hashtags. Figure~\ref{fig:e-m-f-obs}(b) shows tweets from 
+the BlackLivesMatter community with the ``police" word in context, while Figure~\ref{fig:e-m-f-obs}(c) shows the ones from the AllLivesMatter community. 
+
+
+It is clear that in most cases each community has a different reaction to the police actions. While the majority of the BlackLivesMatter community believes that police officers and cops are racist and brutal towards black people, the majority of the AllLivesMatter community supports police actions and even sometimes believes that protesters are violent against the cops.   
+
+
+\begin{figure}[H]
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=1\linewidth]{./pics/obserp.png}  
+ 
+  \caption{Text Filter}
+  \label{fig:sub-first-tfilter}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/obserpb1.png}
+  
+  \includegraphics[width=0.9\linewidth]{./pics/obserpb2.png}
+  \caption{Text filter with only BlackLivesMatter community}
+  \label{fig:sub-second-tfoblmc}
+\end{subfigure}
+
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=0.9\linewidth]{./pics/obserpa1}
+  
+  \includegraphics[width=0.9\linewidth]{./pics/obserpa2}
+  \caption{Text filter with only AllLivesMatter community}
+  \label{fig:sub-third-tfoalmc}
+\end{subfigure}
+
+\captionsetup{justification=centering}
+\caption{Multiple filters Observations}
+\label{fig:e-m-f-obs}
+\end{figure}
+
+

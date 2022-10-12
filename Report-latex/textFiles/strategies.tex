@@ -1,0 +1,101 @@
+\section{Interactive Visualization Strategies}
+
+\subsection{Navigation Strategies}
+
+Interactive data visualization systems have a basic requirement which is to enable navigation of large information. Navigation techniques enable the user to move facilely between different levels of detail in the data. Zoom \& pan, overview \& detail, and focus \& context are the three main approaches that enable navigation during data visualization. These techniques are applied instead of the detail-only approach that was introduced by the Keyhole problem to overcome the big data visualization complexities which may disorient the user due to the absence of an overview of the large information space \cite{salvendy2012handbook}. Attempts to compare the three approaches are inconclusive and subject to specific design scenarios, data, and user tasks, however, experimental results demonstrate the superior performance of these navigation strategies over the detail-only strategy \cite{hornbaek2002navigation}.
+
+\subsubsection{Zoom \& Pan}
+
+Zoom \& pan operations when used in data visualization allow the user first to see the overview and then to interactively zoom into the data and pan the viewpoint within the data space to access details of interest. Zooming could be implemented using continuous space navigation provided by the Pad11 system \cite{bederson1994pad++} for example or to systematically access different scales using the TreeMap system \cite{johnson1999tree}. The ability to zoom in to details of interest from an overview and zoom out to see the overview of the whole again is the main advantage of this approach. Maps are an example of the use of this approach but however efficiently this approach uses screen space and offers infinite scalability, users may become disoriented and lost when zooming in and panning around the data space. Moreover, since the overview is not shown easily this approach can result in slower navigation because of the intensive use of memory if not used correctly \cite{salvendy2012handbook}. 
+
+\begin{figure}[H]
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include first image
+  \includegraphics[width=.8\linewidth]{./pics/zoom1}  
+  \caption{Before the Zoom}
+  \label{fig:sub-first-z}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=.8\linewidth]{./pics/zoom2}   
+  \caption{After the Zoom}
+  \label{fig:sub-second-z}
+\end{subfigure}
+\captionsetup{justification=centering}
+\caption{Zoom \& pan \cite{zoompan} }
+\label{fig:zoomANDpan}
+\end{figure}
+
+\subsubsection{Overview \& Detail}
+
+The overview \& detail strategy enables multiple views to display both an overview and a detail view simultaneously. Unlike the zoom \& pan strategy, the overview \& detail strategy preserves the context of the whole data set while allowing the user to examine detailed information about a particular part of interest. This strategy is often used in both map and image viewing systems \cite{plaisant1995image} and different applications combined with zoom \& pan strategy like in maps. One issue with this strategy is that even though it enables multiple views, usually the detailed view consumes the display area, especially on small screens, and result in the overview not being fully clear.
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.9\textwidth]{./pics/over}
+\caption{Overview \& Detail \cite{googlemap}}
+\label{fig:overviewANDdetail}
+\end{figure}
+
+\subsubsection{Focus \& Context}
+
+Instead of creating a separate view for the intended region of the overview, the focus \& context strategy allows the focus region to grow and differentiate itself from the rest of the overview area. The focus region can show additional information by getting expanded and magnified while the overview gets partially compressed to allow for such expansion in the focus area. The bifocal display is one of the variations of the focus \& context strategy which uses two levels of magnification and the concept of the bifocal display is used in TableLens \cite{rao1994table} and the dock of application icons in desktop operating systems. This strategy provides continuity of detail within the context of the overview however, this strategy applies some distortion to the overview to put more focus on the intended part which might cause some disorientation to the users \cite{baudisch2002keeping}. Moreover, this technique has limited scalability typically under a 10:1 zoom factor \cite{salvendy2012handbook}.
+
+\begin{figure}[H]
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include first image
+  \includegraphics[width=.8\linewidth]{./pics/f1}  
+  \caption{The Overview Visualisation}
+  \label{fig:sub-first-f}
+\end{subfigure}
+\begin{subfigure}{.45\textwidth}
+  \centering
+  \captionsetup{justification=centering}
+  % include second image
+  \includegraphics[width=.8\linewidth]{./pics/f2}  
+  \caption{Focus Region}
+  \label{fig:sub-second-f}
+\end{subfigure}
+\captionsetup{justification=centering}
+\caption{Focus \& Context \cite{linkedjazz}}
+\label{fig:FocusANDContext}
+\end{figure}
+
+\subsection{Visual Interaction Strategies}
+
+While most navigation strategies have issues with scalability, visual interaction strategies support scalability using user-centered techniques. These techniques allow the user to access alternative perspectives and insights since for even modest data volumes it is impossible to show all the data. There are many interaction techniques for data visualizations \cite{ward2015interactive} and the main four categories that should be considered in the design of visualization systems are presented below.
+
+\subsubsection{Selecting}
+
+For a huge data set that can be divided into multiple groups or subsets, The capability to interactively select items of interest in visualization is fundamental. Grouping similar items into a set, selecting items, adding items to a selection, removing selected items, and completely clearing a selection are achievable actions using selection techniques. A user can select items using direct or indirect actions. Direct selection can be implemented in many different ways, such as pointing at the item using the mouse and dragging it to join a group of items \cite{wills1996selection}. On the other hand, indirect selection criteria are based on a set of constraints that user specifies, such as, the ranges of different values. For example, selecting graph nodes with a user-defined distance from another node \cite{ward2015interactive}. Selection is like stroking visual objects with an artist’s brush and that is why it is usually referred to as brushing.
+
+
+\subsubsection{Linking}
+
+When selection is made in one view, linking is used to dynamically relate information between multiple views \cite{north2001multiple,wang2000guidelines}. Selecting (brushing) and linking is the most common view coordination strategy and it is usually called linked brushing \cite{becker1987brushing}. With this strategy, selected items in one view are also highlighted in other views which enable users to uncover relationships and construct comprehensive understandings of the data set. Moreover, linked brushing allows users to define complex constraints by optimizing each view to specify constraints on certain data types and degrees of accuracy \cite{ward2015interactive}. For example, by specifying temporal constraints with a timeline visualization and geographic constraints with a map. Linking strategy comes with a diverse range of options for connection between different linked views such as unlinking one view of the data to explore other regions or specifying what type of information is communicated. 
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering}
+\includegraphics[width=0.9\textwidth]{./pics/brlink2}
+\caption{Selecting (brushing) \& Linking \cite{brushlink}}
+\label{fig:BrushingANDLinking}
+\end{figure}
+
+
+\subsubsection{Filtering}
+
+One of the main strategies to deal with a huge data set is by using interactive filtering operations which reduce the quantity of data visualized and help focus on interesting features. Dynamic query filters provide quick feedback, reduce the quantity of information, and allow exploration of the relationships between attributes. Visual widgets are used to assign a range of interests and view the filtered results in the visualization. There is a diffusion between selecting and filtering however there is a thin but important distinction between them. Filtering is usually achieved through a separate interface and via indirect action. Also, filtering can be executed before viewing a large data set to avoid overwhelming the system. On the other hand, selecting is usually achieved via direct action, such as mouse clicks. Even though selecting and filtering strategies have different mechanisms, the outcome of both of them on the view can be indistinguishable \cite{ward2015interactive}.
+
+\subsubsection{Rearranging and Remapping}
+
+It is important that users have the ability to customize the visual mapping form rather than having a single configuration that might become inadequate. Since the spatial layout is the most important visual mapping, rearranging the spatial layout of the information is very effective for revealing new insight. This simple but important operation gives the user the flexibility to explore relationships between different attributes and finds what best suits their needs.
+
+

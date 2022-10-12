@@ -1,5 +1,5 @@
 \documentclass[svgnames]{article}
-
+\usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{url}
 \usepackage{listings}
@@ -16,7 +16,6 @@
 \usepackage[singlelinecheck=false]{caption}
 % \usepackage{color}
 \usepackage{float}
-\usepackage{graphicx}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{here}
@@ -101,7 +100,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \onehalfspacing
-
+\pgfplotsset{compat=1.18}
 \begin{document}
 \begin{titlepage}
 \begin{center}
@@ -150,21 +149,20 @@ Raazesh Sainudiin
 Nowadays, data is getting bigger and bigger and visualizing it statically requires many displays to show all different perspectives of the data. Moreover, every and each visualization would need the data to be preprocessed to provide the right data for that case. This paper brakes down and explains the needed strategies and tools to interactively visualize big data for different scenarios. It starts by explaining the data visualization process and value. Then it demonstrates the dilemma associated with visualizing big data in a static form. Later on, it introduces interactive data visualizations and elucidates how the interactive form of visualization can overcome the big data visualization issues by introducing the interactive visualization strategies and tools that can be used for different visualization types. Finally, an interactive visualization tool \cite{d3tool} was built using D3 with Reactjs which adapt multiple interactive visualization strategies to demonstrate how it enables the user to interact with the data, reveal information, and obtain some insights for a specific use case involving some Twitter data around the BlackLivesMatter and AllLivesMatter movement.
 
 
-
 \newpage
-\input{tex_files/introduction}
+\input{textFiles/introduction}
 \newpage
-\input{tex_files/strategies}
+\input{textFiles/strategies}
 \newpage
-\input{tex_files/tools}
+\input{textFiles/tools}
 \newpage
-\input{tex_files/interactiveVisual}
+\input{textFiles/interactiveVisual}
 \newpage
-\input{tex_files/application}
+\input{textFiles/application}
 \newpage
-\input{tex_files/conclusion}
+\input{textFiles/conclusion}
 \newpage
-\input{tex_files/futureWork}
+\input{textFiles/futureWork}
 
 
 
@@ -177,7 +175,7 @@ Nowadays, data is getting bigger and bigger and visualizing it statically requir
 % \url{https://github.com/lamastex/working-manuscript-TopologicalDataAnalysisOnABrainNetwork}
 
 \bibliographystyle{plain}
-\bibliography{references}
+\bibliography{Library}
 
 
 \end{document}
